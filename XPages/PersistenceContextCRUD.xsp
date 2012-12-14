@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.resources>
+		<xp:metaData>
+			<xp:this.attrs>
+				<xp:attr name="http-equiv" value="Content-Type"></xp:attr>
+				<xp:attr name="content" value="text/html"></xp:attr>
+				<xp:attr name="charset" value="UTF-8"></xp:attr>
+			</xp:this.attrs>
+		</xp:metaData>
+		<xp:styleSheet href="/c.css"></xp:styleSheet>
+	</xp:this.resources>
+	<xp:this.data>
+		<xe:objectData var="newtoolbox" scope="request">
+			<xe:this.createObject><![CDATA[#{javascript:
+var tmp= PersistenceContextController.createNewToolBox();
+return tmp;}]]></xe:this.createObject>
+		</xe:objectData>
+	</xp:this.data>
+
+	<xp:this.beforeRenderResponse><![CDATA[#{javascript:var tmp=param.locationid;
+if (tmp==null||tmp=="")
+	context.redirectToHome();
+PersistenceContextController.pushCache();
+}]]></xp:this.beforeRenderResponse>
+
+
+
+	<xp:panel style="width:1000px">
+		<h2 class="ctitle">first level cache within persistence context</h2>
+		<xp:table styleClass="ctable" border="1">
+			<xp:tr>
+				<xp:td>
+
+					<p style="width:400px">
+						(the entities within the current persistence context
+						managed by entityManager has the one to one relation
+						to the
+						documents in the database, no duplication
+						exists. they are called
+						managed entities, simply
+						because the entity manager has pointer
+						pointing to
+						them, the entities in the editing area are just
+						clones ,
+						which are counted as detached ones, since
+						the changes being applied
+						on them will not be
+						commited to database until a merge is called)
+						(merge
+						means merging the entities states from detached ones
+						to the
+						managed ones, if the managed ones still
+						exist)
+				</p>
+					<xp:button value="view latest version of cache" id="button4">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete" disableValidators="true">
+						</xp:eventHandler>
+					</xp:button>
+				</xp:td>
+				<xp:td>
+					<xp:table cellpadding="5" cellspacing="5" border="1">
+						<xp:tr>
+							<xp:td>
+								headnode wrapping over the editing location
+						</xp:td>
+							<xp:td>
+								<xp:label value="#{requestScope.cacheHeadNodes}" id="label15">
+								</xp:label>
+							</xp:td>
+						</xp:tr>
+						<xp:tr>
+							<xp:td>
+								all entites being wrapped in nodes in the
+								cache
+						</xp:td>
+							<xp:td>
+								<xp:label value="#{cacheAllNodes}" id="label16">
+								</xp:label>
+							</xp:td>
+						</xp:tr>
+					</xp:table>
+
+
+				</xp:td>
+			</xp:tr>
+
+		</xp:table>
+
+		<xp:br />
+
+		<h2 class="ctitle">Current editing location information</h2>
+		<xp:table border="1" styleClass="ctable">
+			<xp:tr>
+				<xp:td>
+					<xp:label value="location document unid" id="label8"
+						style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="location entity" id="label1" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="location capacity" id="label4" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+			</xp:tr>
+			<xp:repeat id="repeat1" rows="20" var="location"
+				disableOutputTag="true">
+				<xp:this.value><![CDATA[#{javascript:var location=PersistenceContextController.getLocation(param.locationid);
+return location}]]></xp:this.value>
+				<xp:tr>
+					<xp:td>
+						<xp:label value="#{param.locationid}" id="label2"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:label value="#{location}" id="label3">
+						</xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:label value="#{location.locationCapcity}" id="label5">
+						</xp:label>
+					</xp:td>
+				</xp:tr>
+			</xp:repeat>
+		</xp:table>
+
+		<xp:button value="Remove the Location" id="button6">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete" disableValidators="true">
+				<xp:this.action><![CDATA[#{javascript:PersistenceContextController.removeLocation();
+context.redirectToHome();}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		&#160; (REMOVING THE LOCATION ITSELF, ALL TOOLBOXES WILL BE REMOVED
+		FROM DATABASE AS WELL, YOU WILL BE DIRECTED TO THE FIRST PAGE)
+		<xp:br />
+		<xp:br />
+
+		<h2 class="ctitle">CRUD this location's toolboxes and tools, and see how
+			the
+			object graph changes</h2>
+		<xp:table styleClass="ctable" border="1">
+			<xp:tr>
+				<xp:td>
+					<xp:label value="new toolbox:" id="label10" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="#{newtoolbox}" id="label11"></xp:label>
+				</xp:td>
+
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="toolbox height: " id="label12" style="font-weight:bold"
+						for="inputText3">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText id="inputText3" value="#{newtoolbox.toolboxHeight}">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="toolbox weight: " id="label13" style="font-weight:bold"
+						for="inputText3">
+					</xp:label>
+
+				</xp:td>
+				<xp:td>
+					<xp:inputText id="inputText4" value="#{newtoolbox.toolboxWeight}">
+					</xp:inputText>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+		<xp:button value="Add new toolbox to memory not to database"
+			id="button1">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:PersistenceContextController.addNewToolBox(newtoolbox);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button
+			value="Add new toolbox and commit to database by merging Location object"
+			id="button2">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:PersistenceContextController.submitNewToolBox(newtoolbox);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+		<xp:button
+			value="Add new toolbox and commit to database by persisting new ToolBox object"
+			id="button7">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:PersistenceContextController.persistNewToolBox(newtoolbox);}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+
+		<p style="font-weight:bold">
+			PS. when you click button "Add new toolbox and commit to
+			database", all the newly added
+			objects by
+			clicking button "Add new
+			toolbox to memory not to database" are flushed to database as well
+		</p>
+		<br />
+		<br />
+
+		<xp:table border="1" styleClass="ctable">
+			<xp:tr>
+				<xp:td>
+					<xp:label value="toolbox entity" id="label6" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="toolbox height" id="label7" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="toolbox weight" id="label14" style="font-weight:bold">
+					</xp:label>
+				</xp:td>
+			</xp:tr>
+
+			<xp:repeat id="repeat2" rows="20" var="toolbox"
+				disableOutputTag="true"
+				value="#{PersistenceContextController.location.toolBoxEagerList}">
+				<xp:tr>
+					<xp:td>
+						<xp:label value="#{toolbox}" id="label9"></xp:label>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{toolbox.toolboxHeight}" id="inputText1">
+						</xp:inputText>
+					</xp:td>
+					<xp:td>
+						<xp:inputText value="#{toolbox.toolboxWeight}" id="inputText2">
+						</xp:inputText>
+					</xp:td>
+
+					<xp:td>
+						<xp:button value="Remove this Toolbox" id="button3">
+							<xp:eventHandler event="onclick" submit="true"
+								refreshMode="complete" disableValidators="true">
+								<xp:this.action><![CDATA[#{javascript:PersistenceContextController.removeToolBox(toolbox);}]]></xp:this.action>
+							</xp:eventHandler>
+						</xp:button>
+					</xp:td>
+				</xp:tr>
+			</xp:repeat>
+		</xp:table>
+
+		<xp:button value="Make changes to the Toolboxes and flush to database"
+			id="button5">
+			<xp:eventHandler event="onclick" submit="true"
+				refreshMode="complete">
+				<xp:this.action><![CDATA[#{javascript:PersistenceContextController.flush();}]]></xp:this.action>
+			</xp:eventHandler>
+		</xp:button>
+	</xp:panel>
+	<br />
+	<br />
+	<br />
+
+
+
+</xp:view>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	this page shows loading objects from other databases, and make it
+	persistent
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="person name" id="label1" style="font-weight:bold">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:label value="person email" id="label4" style="font-weight:bold"></xp:label>
+			</xp:td>
+		</xp:tr>
+
+		<xp:repeat id="repeat1" rows="30" var="person"
+			disableOutputTag="true">
+			<xp:this.value><![CDATA[#{javascript:var people=PeopleLoadNamesNSFController.getPeople();
+return people}]]></xp:this.value>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="#{javascript:return person.getFullName()}"
+						id="label3">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:label value="#{person.internetAddress}" id="label2">
+					</xp:label>
+				</xp:td>
+			</xp:tr>
+		</xp:repeat>
+	</xp:table>
+	<xp:button value="Complete refresh / No database request is made" id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+		</xp:eventHandler>
+	</xp:button>
+
+</xp:view>

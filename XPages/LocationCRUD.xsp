@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex">
+	<xp:this.data>
+		<xe:objectData var="location1" scope="request">
+			<xe:this.createObject><![CDATA[#{javascript:
+var tmp= LocationController.createNewLocation();
+print("reuturn a new object "+tmp);
+return tmp;}]]></xe:this.createObject>
+		</xe:objectData>
+	</xp:this.data>
+	<h2 style="text:bold">crud example without using entity context, check
+		points:  
+	</h2>
+
+	1. show how to create java object
+	wrapping new/existing dominodocument
+	and make
+	them persistent by managing their life cycles.
+	<br />
+
+	2. learn method interception / @DominoEntity and @DominoProperty
+	<br />
+
+	3. comparing to using default datasource if view name or form field
+	is
+	changed,
+	you need to update all related .xsp. in this example, if the
+	form field
+	or view is changed,
+	you only need to change the
+	@DominoProperty and
+	@DominoEntity definitions in the pojo classes. the
+	places being highly coupled is the bean name
+	"LocationController" (can
+	be changed in faces-config.xml)and
+	its method signatures
+	<br />
+
+	4. default datasource can not do in-memory new object collection
+	<br />
+	5. if your collection is a mix up of in-memory new
+	objects and existing
+	ones from database, then u can't do it in a view, but to use Google
+	collection API
+	/ Lucence(not
+	implemented)
+	<br />
+	<br />
+	<br />
+
+
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="new location: " id="label6" style="font-weight:bold">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:label value="#{location1}" id="label5"></xp:label>
+			</xp:td>
+
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="location capacity: " id="label7" style="font-weight:bold"
+					for="inputText2">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="inputText2" value="#{location1.locationCapcity}">
+				</xp:inputText>
+			</xp:td>
+
+
+		</xp:tr>
+	</xp:table>
+	<xp:button value="Add new location to memory not to database"
+		id="button1">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:print("add location: "+location1);
+LocationController.addLocation(location1);}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<br />
+
+
+
+
+
+
+
+
+
+
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="location" id="label1" style="font-weight:bold">
+				</xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:label value="location capacity" id="label4" style="font-weight:bold"></xp:label>
+			</xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+
+		<xp:repeat id="repeat1" rows="20" var="location"
+			disableOutputTag="true">
+			<xp:this.value><![CDATA[#{javascript:var locations=LocationController.getLocations();
+return locations}]]></xp:this.value>
+			<xp:tr>
+				<xp:td>
+					<xp:label value="#{location}" id="label3">
+					</xp:label>
+				</xp:td>
+				<xp:td>
+					<xp:inputText value="#{location.locationCapcity}" id="inputText1"></xp:inputText>
+				</xp:td>
+
+				<xp:td>
+					<xp:button value="Delete this location from memory , not from database"
+						id="button3">
+						<xp:eventHandler event="onclick" submit="true"
+							refreshMode="complete">
+							<xp:this.action><![CDATA[#{javascript:LocationController.deleteLocation(location)}]]></xp:this.action>
+						</xp:eventHandler>
+					</xp:button>
+
+					&#160;
+					&#160;
+					<xp:link escape="true" text="Edit this location" id="link1"
+						value="/PersistenceContextCRUD.xsp">
+						<xp:this.parameters>
+							<xp:parameter name="locationid"
+								value="#{javascript:return location.getUnid();}">
+							</xp:parameter>
+						</xp:this.parameters>
+					</xp:link>
+				</xp:td>
+
+			</xp:tr>
+		</xp:repeat>
+	</xp:table>
+
+	<xp:button
+		value="Submit all changes applied to in-memory objects to database"
+		id="button2">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="complete">
+			<xp:this.action><![CDATA[#{javascript:LocationController.submit();}]]></xp:this.action>
+		</xp:eventHandler>
+	</xp:button>
+	<xp:messages id="messages1"></xp:messages>
+
+
+</xp:view>

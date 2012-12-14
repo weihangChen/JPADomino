@@ -1,0 +1,38 @@
+OpenNTF Project InlineAttachmentCKEditor (C)Copyright 2012-05-14
+
+This product includes software contributed to
+OpenNTF Alliance (http://www.OpenNTF.org/)
+
+This product is licensed under the terms of the Apache 2.0 license.
+
+The project contains the following 3rd party code:
+
+The product contains part of the source code, which is available from 
+1. https://github.com/helun/Ektorp
+   under license "Apache 2.0 license" 
+
+2. https://github.com/impetus-opensource/Kundera
+   under license "Apache 2.0 license"
+
+3. cglib-nodep-2.2.jar 
+   http://cglib.sourceforge.net/
+   under license "Apache 2.0 license" 
+
+
+4. ehcache-core-2.5.2.jar
+   http://ehcache.org/
+   under license "Apache 2.0 license"
+
+5. javax.persistence-2.0.0.jar
+   http://search.maven.org/remotecontent?   filepath=org/eclipse/persistence/javax.persistence/2.0.0/javax.persistence-2.0.0.jar
+   under license "Eclipse Public License"
+
+6. lucene-core-3.6.1.jar
+   http://lucene.apache.org/core/
+   under license "Apache 2.0 license"
+
+7. http://weblogs.java.net/blog/emcmanus/archive/2007/04/cloning_java_ob.html
+   under license "Apache 2.0 license"
+	
+8. http://code.google.com/p/deep-equals/
+   under license "Apache 2.0 license"

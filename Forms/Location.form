@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE note SYSTEM 'xmlschemas/domino_8_5_3.dtd'>
+<note class='form' xmlns='http://www.lotus.com/dxl' version='8.5' maintenanceversion='3.0'
+ replicaid='C1257A91005D3475'>
+<noteinfo noteid='52a' unid='0AEBB9899D9BE8BFC1257A9D004526A9' sequence='3'>
+<created><datetime dst='true'>20121020T143518,81+02</datetime></created>
+<modified><datetime dst='true'>20121020T165313,92+02</datetime></modified>
+<revised><datetime dst='true'>20121020T165313,91+02</datetime></revised>
+<lastaccessed><datetime dst='true'>20121020T165313,92+02</datetime></lastaccessed>
+<addedtofile><datetime dst='true'>20121020T143519,13+02</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=weihang chen/O=nordic</name></updatedby>
+<wassignedby><name>CN=weihang chen/O=nordic</name></wassignedby>
+<item name='$Comment' sign='true'><text/></item>
+<item name='$HTMLCode' sign='true'>
+<rawitemdata type='1'>
+X/8QAAIADwAHAAAAAAAAAA==
+</rawitemdata></item>
+<item name='$TITLE'><text>Location</text></item>
+<item name='$Info' sign='true'>
+<rawitemdata type='1'>
+hhgBAIAAAAAAgAAAAQABAP///wAQAAAA
+</rawitemdata></item>
+<item name='$Flags'><text/></item>
+<item name='$DesignerVersion'><text>8.5.3</text></item>
+<item name='$$ScriptName' summary='false' sign='true'><text>Location</text></item>
+<item name='locationUNID' placeholder='true'>
+<rawitemdata type='0'>
+</rawitemdata></item>
+<item name='locationCapcity' summary='false'><number>0</number></item>
+<item name='$Fields'><textlist><text>locationCapcity</text><text>locationUNID</text></textlist></item>
+<item name='$Body' sign='true'>
+<rawitemdata type='1'>
+gQKC/1oAAQAAAAAAAAAAAKAFAACgBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAABAAAAAJSHAAAAAAAAAAAAAAAAAQAAAAQAAACDBAEAhf8WAAEAAApsb2NhdGlvblVO
+SUQ6IN0GAACK//7/UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAeAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiv9IAIgBAAUAMAIAAAAAAAACAQAAChgA
+AAAAAAAADAAAAAAAGAAAAAoAkABWAQMABwAMAAUACTBTMEUAbG9jYXRpb25VTklEYg4BAIQAAAAA
+AAAAAADeBgAAiv+F/wgAAQAACoECgwQBAIX/CAABAAAKgQKDBAEAhf8ZAAEAAApsb2NhdGlvbkNh
+cGNpdHk6IADdBgAAiv/+/1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AHgA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIr/NACKAAADADACAAAAAAAAAgEA
+AAoAAAAAAAAAAA8AAAAAAGxvY2F0aW9uQ2FwY2l0eQDeBgAAiv+F/wgAAQAACg==
+</rawitemdata></item></note>
+
